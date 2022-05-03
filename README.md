@@ -20,7 +20,7 @@ As it can be observed that the path determined by RRT star is much more efficien
 ## RRT Planning
 
     python3 rrt_main.py
-
+Video can be found [here](https://drive.google.com/file/d/1fr9Q3yt0DVgucNXXTFocLVBUz3iNhDo5/view?usp=sharing)
 <p align="center">
 
 <img  alt="rrt"  src="results/rrt.gif"  width="75%" /> </p>
@@ -28,7 +28,7 @@ As it can be observed that the path determined by RRT star is much more efficien
 ## RRT Star Planning
 
     python3 rrt_star_main.py
-
+Video can be found [here](https://drive.google.com/file/d/1QGg0w8tV7R90Yd3MIG5evdZ9TrnaC27Z/view?usp=sharing)
 <p align="center">
 
 <img  alt="rrt_star"  src="results/rrt_star.gif"  width="75%" /> </p>

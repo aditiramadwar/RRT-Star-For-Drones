@@ -1,1 +1,37 @@
 # RRT-Star-For-Drones
+
+Authors:
+ - Aditi Ramadwar
+ - Arunava Basu
+
+ ## Dependencies
+- matplotlib
+- numpy
+- scipy
+- rtree-linux
+## Simulations
+As it can be observed that the path determined by RRT star is much more efficient as comparted to the standard RRT algorithm.
+
+ - 3D obstacles in the area are the coloured blocks
+ - The optimal path is shown in red 
+ - Pink is the goal
+ - Green is the start point
+
+## RRT Planning
+
+    python3 rrt_main.py
+
+<p align="center">
+
+<img  alt="rrt"  src="results/rrt.gif"  width="75%" /> </p>
+
+## RRT Star Planning
+
+    python3 rrt_star_main.py
+
+<p align="center">
+
+<img  alt="rrt_star"  src="results/rrt_star.gif"  width="75%" /> </p>
+
+
+

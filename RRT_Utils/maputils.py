@@ -21,7 +21,7 @@ def cuboid_data(box):
     return box[0] + np.array(x), box[1] + np.array(y), box[2] + np.array(z)
 
 class Map:
-  def __init__(self,obstacle_list,limits, path_resolution = 0.5):
+  def __init__(self,obstacle_list, path_resolution = 0.5):
     self.obstacles = obstacle_list
     self.idx = self.get_tree(obstacle_list)
     self.len = len(obstacle_list)
@@ -34,12 +34,12 @@ class Map:
     ls = [(i, (*obj, ), None) for i, obj in enumerate(obstacle_list)]
     return index.Index(ls, properties = p)
 
-  def add(self,obstacle):
+  def add(self, obstacle):
     self.idx.insert(self.len,obstacle)
     self.obstacles.append(obstacle)
     self.len += 1
 
-  def collision(self,start,end):
+  def collision(self ,start, end):
     dist = np.linalg.norm(start-end)
     n = int(dist/self.path_res)
     points = np.linspace(start,end,n)

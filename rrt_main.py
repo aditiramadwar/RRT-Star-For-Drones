@@ -14,7 +14,7 @@ obstacles = [[0, 15, 0, 20, 35, 60],
             [35, 15, 0, 50, 30, 60]]
 
 bounds = np.array([0,100])
-mapobs = Map(obstacles, bounds)
+mapobs = Map(obstacles)
 start = np.array([100,0,10])
 goal = np.array([30,90,90])
 

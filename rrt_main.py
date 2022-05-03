@@ -1,5 +1,5 @@
 import numpy as np
-from PathPlanning import RRT, Map
+from RRT_Utils import RRT, Map
 np.random.seed(7)
 
 #   xmin, ymin, zmin, xmax, ymax, zmax

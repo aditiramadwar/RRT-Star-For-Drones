@@ -1,7 +1,8 @@
 from .rrt import *
+from .sampleutils import InformedSampler
 from math import ceil
 
-class RRTStar(RRT):
+class Informed_RRTStar(RRT):
 
     def __init__(self, start, goal, Map,
                  max_extend_length = 10.0,
@@ -9,14 +10,14 @@ class RRTStar(RRT):
                  max_iter = 200 ):
         super().__init__(start, goal, Map, max_extend_length, goal_sample_rate, max_iter)
         self.final_nodes = []
-
+        self.Informedsampler = InformedSampler(goal, start)
     def plan(self):
         """Plans the path from start to goal while avoiding obstacles"""
         self.start.cost = 0
         self.tree.add(self.start)
         for i in range(self.max_iter):
-            rnd = self.get_random_node()
-
+            # rnd = self.get_random_node()
+            rnd = self.sample()
             nearest_node = self.tree.nearest(rnd)
             new_node = self.steer(nearest_node, rnd)
             if not self.map.collision(nearest_node.p,new_node.p):
@@ -61,3 +62,13 @@ class RRTStar(RRT):
             if node.parent == parent_node:
                 node.cost = self.new_cost(parent_node, node)
                 self.update_cost(node)
+
+    def sample(self):
+        lower,upper = self.map.bounds
+        if self.goal.parent:
+          rnd = np.inf
+          while not self.map.inbounds(rnd):
+              rnd = self.Informedsampler.sample(self.goal.cost)
+        else:
+          rnd = lower + np.random.rand(3)*(upper - lower)
+        return Node(rnd)

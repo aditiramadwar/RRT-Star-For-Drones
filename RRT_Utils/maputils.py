@@ -21,12 +21,12 @@ def cuboid_data(box):
     return box[0] + np.array(x), box[1] + np.array(y), box[2] + np.array(z)
 
 class Map:
-  def __init__(self,obstacle_list, path_resolution = 0.5):
+  def __init__(self,obstacle_list,bounds, path_resolution = 0.5):
     self.obstacles = obstacle_list
     self.idx = self.get_tree(obstacle_list)
     self.len = len(obstacle_list)
     self.path_res = path_resolution
-
+    self.bounds = bounds
   @staticmethod
   def get_tree(obstacle_list):
     p = index.Property()
@@ -54,8 +54,20 @@ class Map:
         X, Y, Z = cuboid_data(box)
         ax.plot_surface(X, Y, Z, rstride=1, cstride=1,alpha = 0.2,zorder = 1)
 
+  def inbounds(self,p):
 
-  def draw_scene(self, start, end, path = None, ax = None, graph = False):
+      lower,upper = self.bounds
+      return (lower <= p).all() and (p <= upper).all()
+
+  def draw_graph(self,ax, t_obj):
+        '''plot the whole graph'''
+        for node in t_obj.tree.all():
+            if node.parent:
+                xy = np.c_[node.p,node.parent.p]
+                ax.plot(*xy, "-",color = (0.2, 0.9, 0.2, 0.9),zorder = 5)
+
+  def draw_scene(self, start, end,t_obj, path = None, ax = None, graph = True):
+    
     if ax is None:
         fig = plt.figure(figsize=(30,20))
         ax = Axes3D.Axes3D(fig)
@@ -65,6 +77,8 @@ class Map:
     ax.scatter(float(start[0]), float(start[1]), float(start[2]), "-", s=80, color = (0.2, 0.9, 0.2, 0.9), zorder = 5)
     ax.scatter(float(end[0]), float(end[1]), float(end[2]), "-", s=60, color = (0.9, 0.2, 0.9, 0.9), zorder = 5)
     self.plotobs(ax)
+    if graph: 
+      self.draw_graph(ax, t_obj)
     if path is not None:
 
         path_x = (path.T)[0]

@@ -34,4 +34,4 @@ Video can be found [here](https://drive.google.com/file/d/1QGg0w8tV7R90Yd3MIG5ev
 <img  alt="rrt_star"  src="results/rrt_star.gif"  width="75%" /> </p>
 
 ## Informed RRT Star Planning
-   python3 rrt_star_main.py
+   python3 i_rrt_star_main.py
